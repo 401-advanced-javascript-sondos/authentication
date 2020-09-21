@@ -1,5 +1,5 @@
 'use strict';
-
+require('dotenv').config();
 const mongoose = require('mongoose');
 const bcrypt=require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -10,9 +10,9 @@ const jwt = require('jsonwebtoken');
 let User = mongoose.Schema({
   username: { type: String, require: true ,unique: true},
   password: { type: String, require: true },
-  // email: { type: string },
-  // fullname: { type: string },
-  // role: { type: string, enum: ['admin', 'editor', 'writer', 'user'] }
+  email: { type: String },
+  fullname: { type: String },
+  role: { type: String, enum: ['admin', 'editor', 'writer', 'user'] }
 });
 
 // User.plugin(uniqueValidator);
