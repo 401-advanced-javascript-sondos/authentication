@@ -36,7 +36,7 @@ describe('server.js', () => {
     return mockRequest.post('/signup')
       .send(data)
       .then(result => {
-        expect(result.status).toBe(200);
+        expect(result.status).toBe(201);
       }).catch(err => {
         console.log(err);
       }).catch(console.error);
@@ -44,12 +44,12 @@ describe('server.js', () => {
 
 
   it('test post /signin', async () => {
-    // const data = {
-    //   'username': 'sondos',
-    //   'password': '1234',
-    // };
-    // await mockRequest.post('/signup').send(data);
-    let result = await mockRequest.post('/signin').auth('sondos', '1234');
+    const data = {
+      'username': 'sondos1',
+      'password': '1234',
+    };
+    await mockRequest.post('/signup').send(data);
+    let result = await mockRequest.post('/signin').auth('sondos1', '1234');
     expect(result.status).toBe(200);
 
   });

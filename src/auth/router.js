@@ -7,9 +7,9 @@ const userSchema=require('./models/usersModel');
 
 
 router.get('/user',async(req,res)=>{
-  console.log('here');
+  // console.log('here');
   const result= await userSchema.find({});
-  console.log('result',result);
+  // console.log('result',result);
   res.status(200).json(result);
 });
 
@@ -24,7 +24,7 @@ router.post('/signin', basicAuth, async (req,res) => {
     // const authraUser= new userSchema({username:user.username});
     // console.log('authUser0',authraUser)
     const token= await userSchema.generateToken(user);
-    console.log('out sign in',{token});
+    // console.log('out sign in',{token});
     res.status(200).send({ token, user });
 
   }else{
@@ -39,7 +39,7 @@ router.post('/signup',async (req,res) => {
   // console.log(schema)
   const data =await schema.save();
   // console.log(data)
-  res.status(200).send({data});
+  res.status(201).send({data});
 
 });
 
