@@ -7,8 +7,10 @@ const userSchema=require('./models/usersModel');
 
 
 router.get('/user',async(req,res)=>{
+  console.log('here');
   const result= await userSchema.find({});
-  return result;
+  console.log('result',result);
+  res.status(200).json(result);
 });
 
 
@@ -19,9 +21,9 @@ router.post('/signin', basicAuth, async (req,res) => {
   // console.log('user',user);
   if(valid){
     // console.log('in')
-    const authraUser= new userSchema({username:user.username});
+    // const authraUser= new userSchema({username:user.username});
     // console.log('authUser0',authraUser)
-    const token= await authraUser.generateToken();
+    const token= await userSchema.generateToken(user);
     console.log('out sign in',{token});
     res.status(200).send({ token, user });
 
