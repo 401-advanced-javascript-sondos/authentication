@@ -1,3 +1,5 @@
+'use strict';
+
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const { server } = require('../src/server');
@@ -19,21 +21,21 @@ describe('server.js', () => {
     });
 
 
-    // it('should oauth ', async () => {
+    it('should oauth ', async () => {
 
-    //     const data = {
-    //         'username': 'sondos',
-    //         'password': '1234',
-    //     };
-    //     await mockRequest.post('/signup').send(data);
+        const data = {
+            'username': 'sondos',
+            'password': '1234',
+        };
+        await mockRequest.post('/signup').send(data);
 
 
-    //     let result = await mockRequest.get('/oauth').send();
+        let result = await mockRequest.get('/oauth').send(data);
+        // expect(result).toBe();
+        expect(result.token).toBe('1');
 
-    //     // return mockRequest.get('/class')
-    //     // .then((results) => {
-    //     expect(result.status).toBe(404);
-    //     // }).catch(console.error);
-    // });
+        
+
+    });
 
 });
