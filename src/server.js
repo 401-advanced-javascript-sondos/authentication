@@ -8,6 +8,7 @@ const notfound =require('./middleware/404');
 const handdleerror=require('./middleware/500');
 const router =require('./auth/router');
 
+
 const app=express();
 app.use(express.json());
 app.use(cors());
@@ -16,7 +17,6 @@ app.use(morgan('dev'));
 
 //==============
 app.use('/',router);
-
 
 
 //--------error 500---------
