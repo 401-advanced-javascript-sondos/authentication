@@ -1,5 +1,6 @@
 'use strict';
 
+require('dotenv').config();
 const { server } = require('../src/server');
 const supergoose = require('@code-fellows/supergoose');
 const mockRequest = supergoose(server);

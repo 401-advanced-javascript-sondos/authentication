@@ -4,7 +4,7 @@ const express=require('express');
 const router=express.Router();
 const basicAuth=require('./middleware/basic');
 const userSchema=require('./models/usersModel');
-
+const oauth=require('./middleware/oauth');
 
 router.get('/user',async(req,res)=>{
   // console.log('here');
@@ -40,6 +40,12 @@ router.post('/signup',async (req,res) => {
   const data =await schema.save();
   // console.log(data)
   res.status(201).send({data});
+
+});
+
+
+router.get('/oauth',oauth,(req,res)=>{
+  res.status(200).json({token :req.token,user :req.user});
 
 });
 
