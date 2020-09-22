@@ -63,9 +63,26 @@ User.statics.get = async function (user) {
     return result;
   } else {
     console.log('create new useer');
-    let newuser = new this ({username:user.username,password:user.password });
+    let newuser = new this({ username: user.username, password: user.password });
     return newuser.save();
   };
 };
+
+
+
+User.statics.authenticateToken = async function (token) {
+  let checkToken = jwt.verify(token, process.env.KEY);
+  // console.log(checkToken);
+  if (await this.findOne({ username: checkToken.username })) {
+    return Promise.resolve({
+      token: checkToken,
+      user: checkToken.username
+    });
+
+  }else{
+    return Promise.reject();
+  }
+};
+
 
 module.exports = mongoose.model('User', User);

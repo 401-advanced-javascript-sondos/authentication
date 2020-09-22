@@ -5,8 +5,10 @@ const router=express.Router();
 const basicAuth=require('./middleware/basic');
 const userSchema=require('./models/usersModel');
 const oauth=require('./middleware/oauth');
+const bearer=require('./middleware/bearer');
 
-router.get('/user',async(req,res)=>{
+router.get('/user',bearer,async(req,res)=>{
+  console.log(req.user);
   // console.log('here');
   const result= await userSchema.find({});
   // console.log('result',result);
