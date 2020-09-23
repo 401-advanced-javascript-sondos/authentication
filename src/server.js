@@ -7,6 +7,8 @@ const morgan=require('morgan');
 const notfound =require('./middleware/404');
 const handdleerror=require('./middleware/500');
 const router =require('./auth/router');
+const exrouter=require('./auth/extra-router');
+
 
 
 const app=express();
@@ -17,6 +19,7 @@ app.use(morgan('dev'));
 
 //==============
 app.use('/',router);
+app.use('/',exrouter);
 
 
 //--------error 500---------

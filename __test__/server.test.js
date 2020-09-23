@@ -4,6 +4,7 @@ require('dotenv').config();
 const { server } = require('../src/server');
 const supergoose = require('@code-fellows/supergoose');
 const mockRequest = supergoose(server);
+const jwt=require('jsonwebtoken');
 
 // process.env.KEY = 'mytoken';
 // const jwt = require('jsonwebtoken');
@@ -51,21 +52,21 @@ describe('server.js', () => {
     };
     await mockRequest.post('/signup').send(data);
     let result = await mockRequest.post('/signin').auth('sondos1', '1234');
-    expect(result.status).toBe(200);
-
+    const token = jwt.verify(result.body.token, process.env.KEY);
+    expect(token).toBeDefined();
   });
 
-  it('test post /user', async() => {
-    // const data = {
-    //   'username': 'sondos',
-    //   'password': '1234',
-    // };
-    // await mockRequest.post('/signup').send(data);
-    await mockRequest.get('/user').then(result=>{
-      expect(result.status).toBe(200);
+  // it('test post /user', async() => {
+  //   // const data = {
+  //   //   'username': 'sondos',
+  //   //   'password': '1234',
+  //   // };
+  //   // await mockRequest.post('/signup').send(data);
+  //   await mockRequest.get('/user').then(result=>{
+  //     expect(result.status).toBe(200);
 
-    });
-  });
+  //   });
+  // });
 
 
 });

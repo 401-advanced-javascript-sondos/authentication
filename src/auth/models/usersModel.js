@@ -49,7 +49,7 @@ User.statics.authenticate = async function (username, password) {
 
 User.statics.generateToken = function (user) {
   // const { username } = this;
-  const token = jwt.sign({ username: user.username }, process.env.KEY);
+  const token = jwt.sign({ username: user.username , action:roles[user.role]}, process.env.KEY);
   // console.log('token',token);
   return token;
 };
@@ -83,6 +83,16 @@ User.statics.authenticateToken = async function (token) {
     return Promise.reject();
   }
 };
+
+let roles = {
+  admin: ['read', 'create', 'update', 'delete'],
+  editor: ['read', 'create', 'update'],
+  writer: ['read', 'create'],
+  user: ['read']
+};
+
+
+
 
 
 module.exports = mongoose.model('User', User);
