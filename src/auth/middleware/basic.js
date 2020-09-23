@@ -17,7 +17,7 @@ module.exports = async (req, res, next) => {
   // we expect to have req headers
   // Basic YWhtYWQ6MTIzNA==
   const auth = req.headers.authorization.split(' ');
-    console.log('auth',auth)
+  console.log('auth', auth);
   if (auth[0] === 'Basic') {
     // take the auth[1]: YWhtYWRfc2hlbGEgOjEyMzQ=
     // after decode ahmad_shela:1234
