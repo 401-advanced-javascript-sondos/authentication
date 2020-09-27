@@ -18,6 +18,7 @@ describe('bearer middle ware', () => {
         const data = {
             username: 'sondos',
             password: '1234',
+            role: 'admin',
         };
         await mockRequest.post('/signup').send(data);
         const autHeader = base64.encode(
@@ -28,7 +29,15 @@ describe('bearer middle ware', () => {
 
         expect(result.body.token).toBeDefined();
         expect(result.status).toBe(200);
-        // }).catch(console.error);
+        const bearerHeader = await jwt.sign({ username: 'sondos' }, '555');
+        console.log('baererheader', bearerHeader);
+        // const secretResponse = await mockRequest.get('/add').set('authorization', `Bearer ${bearerHeader}`);
+        const secretResponse = await mockRequest.get('/user',bearer);
+
+        expect(secretResponse.statusCode).toBe(500);
+        //     // expect(signinResponse.statusCode).toBe(200);
+        //     expect(secretResponse.statusCode).toBe(200);
+        //     // expect(!!signupResponse.text).toBeTruthy();
     });
 
 

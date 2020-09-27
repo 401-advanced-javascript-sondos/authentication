@@ -18,3 +18,7 @@ using postman or swagger
   - body = {username : 'some name' , password : 'pass'}
 * signin : POST - http://localhost:4000/signup
   - Authoraization --> enter the username and the paeeword
+
+
+## UML 
+  ![img](auth.png)

@@ -17,7 +17,6 @@ module.exports = (req, res, next) => {
     const token = auth[1];
     console.log('token', token);
     user.authenticateToken(token).then(result => {
-      console.log(result);
       req.user = result;
       next();
 

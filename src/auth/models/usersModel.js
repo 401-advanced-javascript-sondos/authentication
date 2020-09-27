@@ -12,10 +12,9 @@ let User = mongoose.Schema({
   password: { type: String, require: true },
   email: { type: String },
   fullname: { type: String },
-  role: { type: String, enum: ['admin', 'editor', 'writer', 'user'] }
+  role: { type: String,     default: 'user',  enum: ['admin', 'editor', 'writer', 'user'] }
 });
 
-// User.plugin(uniqueValidator);
 
 
 User.pre('save', async function (next) {
@@ -49,9 +48,11 @@ User.statics.authenticate = async function (username, password) {
 
 User.statics.generateToken = function (user) {
   // const { username } = this;
-  const token = jwt.sign({ username: user.username , action:roles[user.role]}, process.env.KEY);
-  // console.log('token',token);
+  const token = jwt.sign({ username: user.username , actions:roles[user.role]}, process.env.KEY);
+  console.log('tokenin',token);
   return token;
+  // return jwt.sign({ username: user.username , acitons:roles[user.role]}, process.env.KEY);
+
 };
 
 
@@ -71,13 +72,12 @@ User.statics.get = async function (user) {
 
 
 User.statics.authenticateToken = async function (token) {
-  let checkToken = jwt.verify(token, process.env.KEY);
-  // console.log(checkToken);
+  let checkToken = await jwt.verify(token, process.env.KEY);
+  console.log('checkToken');
+  console.log(checkToken);
+
   if (await this.findOne({ username: checkToken.username })) {
-    return Promise.resolve({
-      token: checkToken,
-      user: checkToken.username
-    });
+    return Promise.resolve( checkToken);
 
   }else{
     return Promise.reject();
