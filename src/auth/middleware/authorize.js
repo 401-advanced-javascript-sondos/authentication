@@ -2,11 +2,11 @@
 
 module.exports = (inaction) => {
     return (req, res, next) => {
-        console.log('inside middelware',req.user.token.action);
+        console.log('inside middelware',req.user);
         // console.log(req.user);
 
         try {
-            if (req.user.token.action.includes(inaction)) {
+            if (req.user.actions.includes(inaction)) {
                 console.log('in iuf');
                 next();
             } else {

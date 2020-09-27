@@ -1,13 +1,14 @@
 'use strict';
 
 require('dotenv').config();
+const base64 = require('base-64');
+
 const { server } = require('../src/server');
 const supergoose = require('@code-fellows/supergoose');
 const mockRequest = supergoose(server);
-const jwt=require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 
 // process.env.KEY = 'mytoken';
-// const jwt = require('jsonwebtoken');
 // require('dotenv').config();
 
 describe('server.js', () => {
@@ -56,16 +57,23 @@ describe('server.js', () => {
     expect(token).toBeDefined();
   });
 
-  // it('test post /user', async() => {
-  //   // const data = {
-  //   //   'username': 'sondos',
-  //   //   'password': '1234',
-  //   // };
-  //   // await mockRequest.post('/signup').send(data);
-  //   await mockRequest.get('/user').then(result=>{
-  //     expect(result.status).toBe(200);
+  // it('test post /user', async () => {
+  //   const data = {
+  //     username: 'Ali',
+  //     password: '1234',
+  //   };
+  //   const autHeader = base64.encode(
+  //     `${data.username}:${data.password}`,
+  //   );
+  //   console.log('header test', autHeader)
+  //   await mockRequest.post('/signup').send(data);
+  //   const bearerHeader = await jwt.sign({ username: 'sondos' }, '555');
+  //   console.log('baererheader',bearerHeader)
+  //   await mockRequest.get('/user').set('authorization', `Bearer ${bearerHeader}`)
+  //     .then(result => {
+  //       expect(result.status).toBe(200);
 
-  //   });
+  //     });
   // });
 
 
